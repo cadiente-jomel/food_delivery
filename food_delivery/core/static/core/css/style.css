@@ -1,6 +1,7 @@
 :root {
   --overlay-color: rgba(22, 29, 32, 0.6);
   --neutral-color: #fff;
+  --neutral-color-darker: #d8e3e7;
 
   --padding-sm: .5rem 2rem;
 
@@ -9,6 +10,10 @@
 
   --primary-color: #e31c1b;
   --secondary-color: #bd4020;
+
+  --margin-sm: .3rem;
+
+  --letter-spacing-sm: .2rem;
 }
 *,
 *::before,
@@ -20,11 +25,11 @@
 
 html {
   font-size: 62.5%;
-  font-family: 'Montserrat', sans-serif;
 }
 
 body {
   background-color: #000;
+  font-family: 'Montserrat', sans-serif;
   height: 100vh;
 }
 
@@ -75,23 +80,31 @@ home page search & headers
   justify-content: center;
 }
 
-.search form {
-  position: relative;
+
+.search__custom {
+  background-color: var(--neutral-color);
+  border-radius: 50px;
+  margin-bottom: var(--margin-sm);
+  padding: var(--padding-sm);
 }
 
 .search__text {
   width: 40rem;
 }
 
+.search__text:focus {
+  outline: none;
+}
+
 .search__btn {
-  width: 10rem;
-  position: absolute;
-  right: 0;
+  width: 5rem;
+  background: none;
+  text-align: right;
 }
 
 .search__text, .search__btn {
   padding: var(--padding-sm);
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size);
   border: none;
 }
 
@@ -107,7 +120,17 @@ home page search & headers
 
 .headers__sub {
   font-size: 1.6rem;
+}
 
+.explore {
+  color: var(--neutral-color);
+  font-size: var(--font-size);
+  letter-spacing: var(--letter-spacing-sm);
+  text-decoration: none;
+}
+
+.explore:hover{
+  color: var(--neutral-color-darker);
 }
 
 /*-----------------------

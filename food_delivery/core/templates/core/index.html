@@ -32,11 +32,12 @@
             <form action="" method="get">
                 <div class="search__custom">
                   <input id="search" class="search__text" type="text" name="search" placeholder="Find your food to get started">
-                  <input class="search__btn" type="submit"><i class="fas fa-search"></input>
+                  {% comment %}<input class="search__btn " type="submit"><i class="fas fa-search"></input>{% endcomment %}
+                  <button class="search__btn"><i class="fas fa-search"></i></button>
                 </div>
             </form>
 
-            <a class="browse" href="{% url 'browsing-page' %}">Browse</a>
+            <a class="explore" href="{% url 'browsing-page' %}">Explore</a>
           </div>
       </div>
     </div>
