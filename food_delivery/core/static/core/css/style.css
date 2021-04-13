@@ -1,0 +1,115 @@
+:root {
+  --overlay-color: rgba(22, 29, 32, 0.6);
+  --neutral-color: #fff;
+
+  --padding-sm: .5rem 2rem;
+
+  --font-size-sm: 1.2rem;
+  --font-size: 1.6rem;
+
+  --primary-color: #e31c1b;
+  --secondary-color: #bd4020;
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 62.5%;
+  font-family: 'Montserrat', sans-serif;
+}
+
+body {
+  background-color: #000;
+  height: 100vh;
+}
+
+.container-home {
+  height: 100%;
+}
+
+/*-------------------------
+background
+-------------------------*/
+
+.bg {
+  width: 100%;
+}
+
+.background__overlay {
+  background-color: var(--overlay-color);
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  z-index: -99998;
+}
+
+.background__image {
+  height: auto;
+  position: absolute;
+  width: 100%;
+  z-index: -99999;
+}
+
+/*-------------------------
+background
+-------------------------*/
+
+/*-----------------------
+home page search & headers
+-----------------------*/
+
+.srch {
+  height: 100%;
+}
+
+.search {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+}
+
+.search form {
+  position: relative;
+}
+
+.search__text {
+  width: 40rem;
+}
+
+.search__btn {
+  width: 10rem;
+  position: absolute;
+  right: 0;
+}
+
+.search__text, .search__btn {
+  padding: var(--padding-sm);
+  font-size: var(--font-size-sm);
+  border: none;
+}
+
+.headers__text {
+  color: var(--neutral-color);
+  text-align: center;
+}
+
+.headers__title {
+  font-size: 6.7rem;
+  font-family: 'Cedarville Cursive', cursive;
+}
+
+.headers__sub {
+  font-size: 1.6rem;
+
+}
+
+/*-----------------------
+home page search & headers
+-----------------------*/

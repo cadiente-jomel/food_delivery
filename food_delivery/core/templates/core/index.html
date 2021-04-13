@@ -1,19 +1,43 @@
 {% extends 'core/base.html' %}
 
+{% block style %}
+  <style>
+    body {
+      overflow: hidden;
+    }
+  </style>
+{% endblock %}
+
 {% block content %}
-    <h1>Index Page</h1>
-    <!-- use ajax here -->
-    <div class="container">
-        <div class="search">
-            <form action="POST">
-                <input id="search-food" type="text" name="search">
-                <input class="btn btn-primary" type="submit">
+    <div class="container-home">
+      <div class="bg">
+          <div class="background">
+            <div class="background__overlay"></div>
+
+            {% load static %}
+            <img class="background__image" src="{% static 'core/assets/bg.jpg' %}" alt="">
+          </div>
+      </div>
+
+      <!-- search bar use ajax here -->
+
+      <div class="srch">
+          <div class="search">
+            <div class="headers">
+                <div class="headers__text">
+                  <h1 class="headers__title">Foody</h2>
+                  <p class="headers__sub">Foody helps you save time by buying high quality food without leaving your home</p>
+                </div>
+            </div>
+            <form action="" method="get">
+                <div class="search__custom">
+                  <input id="search" class="search__text" type="text" name="search" placeholder="Find your food to get started">
+                  <input class="search__btn" type="submit"><i class="fas fa-search"></input>
+                </div>
             </form>
-        </div>
-        <div class="browse">
-            <a href="{% url 'browsing-page' %}">Browse</a>
-            <a href="{% url 'cart-page' request.user.user_name %}">Cart</a>
-            <a href="{% url 'profile-page' request.user.user_name %}">Profile</a>
-        </div>
+
+            <a class="browse" href="{% url 'browsing-page' %}">Browse</a>
+          </div>
+      </div>
     </div>
 {% endblock %}

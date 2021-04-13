@@ -9,13 +9,16 @@ def index_page(request):
 
 
 def browsing_page(request):
-    store = Store.objects.all()
+    stores = Store.objects.all()
 
     context = {
-        'store': store
+        'stores': stores
     }
 
     return render(request, 'core/browsing.html', context)
+
+def store_page(request, store_name):
+    pass
 
 def cart_page(request, user):
     return render(request, 'core/cart.html')
