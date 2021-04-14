@@ -45,7 +45,7 @@ class Customer(AbstractBaseUser, PermissionsMixin):
     objects = CustomCustomerManager()
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['user_name', 'first_name']
-    
+
     @property
     def get_fullname(self):
         return f'{self.first_name} {self.last_name}'

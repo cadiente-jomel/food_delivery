@@ -1,7 +1,10 @@
 from django.db import models
-from user.models import Customer
+from django.urls import reverse
+from django.utils.text import slugify
 
 from PIL import Image
+
+from user.models import Customer
 # Create your models here.
 class Store(models.Model):
     store_help_text = 'Keep in mind you can only own one store at the moment'
@@ -9,9 +12,18 @@ class Store(models.Model):
     customer = models.OneToOneField(Customer, on_delete=models.CASCADE)
     store_name = models.CharField(max_length=250, help_text=store_help_text)
     location = models.CharField(max_length=500)
+    slug = models.SlugField(blank=True)
 
     def __str__(self):
         return self.store_name
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
+        self.slug = slugify(self.store_name)
+
+    def get_absolute_url(self):
+        return reverse('store-page', args=[self.slug])
 
 class StoreProfile(models.Model):
     store = models.OneToOneField(Store, on_delete=models.CASCADE)
@@ -33,6 +45,7 @@ class StoreProfile(models.Model):
 class Product(models.Model):
     store = models.ForeignKey(Store, on_delete=models.CASCADE)
     name = models.CharField(max_length=250)
+    slug = models.SlugField(blank=True)
     price = models.CharField(max_length=250)
     description = models.CharField(max_length=1000)
     create_date = models.DateTimeField()
@@ -41,6 +54,18 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
+        self.slug = slugify(self.name)
+        # img = Image.open(self.thumbnail)
+
+        # if img.width > 300 or img.height > 300:
+            # output = (300, 300)
+            # img.thumbnail(output)
+            # img.save(self.thumbnail.path)
+
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
@@ -58,6 +83,9 @@ class ProductCategory(models.Model):
 
     def __str__(self):
         return self.product.name
+
+    def get_absolute_url(self):
+        return reverse('product-page', args=[self.product.store.slug, self.product.slug])
 
     class Meta:
         verbose_name_plural = 'Products has Categories'

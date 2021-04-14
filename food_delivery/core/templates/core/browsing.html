@@ -1,9 +1,62 @@
 {% extends 'core/base.html' %}
 
 {% block content %}
-    <h1>Browsing Page</h1>
-    {% for store in stores %}
-        <img src="{{ store.storeprofile.store_profile.url }}" alt="">
-        <p>{{ store.store_name }}</p>
-    {% endfor %}
+    <div class="container browsing__container">
+        <h2 class="stores__title">
+          Stores
+        </h2>
+        <div class="stores">
+            <section id="minimal-statistics">
+              <div class="row">
+                {% for store in stores %}
+                  <div class="col-xl-3 col-sm-6 col-12 mb-4">
+                    <div class="card">
+                      <div class="card-content">
+                        <div class="card-body">
+                          <div class="media d-flex">
+                            <div class="media-body text-left">
+                              <h3 class="danger">{{ store.store_name }}</h3>
+                              <span>{{ store.customer.get_fullname }}</span>
+                              <br>
+
+                              <a href="{{ store.get_absolute_url }}" class="btn btn-primary mt-3">Shop</a>
+                            </div>
+                            <div class="align-self-center">
+                              <i class="fas fa-store store__icon"></i>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                {% endfor %}
+              </div>
+            </section>
+        </div>
+
+        <div class="products">
+          <h2 class="products__title">
+            Products
+          </h2>
+          <div class="row products__row">
+          {% for prod in products %}
+
+              <div class="card card--custom" style="width: 18rem;">
+                  <div class="card__img">
+                    <img class="card-img-top" src="{{ prod.product.thumbnail.url }}" alt="Card image cap">
+                  </div>
+                  <div class="card-body">
+                    <h5 class="card-title">{{ prod.product.name }}</h5>
+
+                    {% for category in prod.category.all %}
+                    <p class="card-text">{{ category|upper }}</p>
+                    {% endfor %}
+                    <a href="{{ prod.get_absolute_url }}" class="btn btn-primary">READ MORE</a>
+                  </div>
+              </div>
+
+          {% endfor %}
+          </div>
+        </div>
+    </div>
 {% endblock %}

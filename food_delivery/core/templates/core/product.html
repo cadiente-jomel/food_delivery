@@ -1,0 +1,42 @@
+{% extends 'core/base.html' %}
+
+
+{% block content %}
+<div class="container product__container">
+    <div class="sproduct row">
+      <div class="left col">
+        <div class="sproduct__img">
+          <img src="{{ product.thumbnail.url  }}" alt="">
+        </div>
+      </div>
+      <div class="right col">
+        <div class="sproduct__details">
+
+          <h1 class="sproduct__title">
+            {{ product.name  }}
+          </h1>
+
+         <div class="sproduct__tally">
+            <h1 class="sproduct__price">
+              {{ product.price }}
+            </h1>
+         </div>
+
+          <p class="sproduct__description">
+            {{ product.description }}
+          </p>
+
+          <div class="sproduct__cart">
+              <div class="cart__increase"><i class="fas fa-arrow-up"></i></div>
+              <input id="quantity" type="number" name="quantity">
+              <div class="cart__decrease"><i class="fas fa-arrow-down"></i></div>
+
+              <button class="btn--primary cart__btn"><i class="fas fa-cart-plus"></i>Add to Cart</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+</div>
+
+{% endblock %}
