@@ -3,11 +3,22 @@
   --neutral-color: #fff;
   --neutral-color-darker: #d8e3e7;
 
-  --background-color: #F1F2F7;
+  --title-color: #505050;
+  --description-color: #979797;
+
+
+  --normal-size: 2rem;
+  --md-size: 3rem;
+  --border-color: 1px solid black;
+
+  --font-weight-lg: 700;
+
+  --background-color: #f1f2f7;
 
   --padding-sm: 0.5rem 2rem;
 
   --font-size-sm: 1.2rem;
+  --font-size-md: 1.3rem;
   --font-size: 1.6rem;
 
   --primary-color: #e31c1b;
@@ -18,6 +29,7 @@
   --margin-sm: 0.3rem;
 
   --letter-spacing-sm: 0.2rem;
+  --letter-spacing: 0.16rem;
 }
 *,
 *::before,
@@ -44,33 +56,34 @@ body {
 /*-------------------------
  *  bootstrap overridden components
  *  ----------------------- */
-  .btn-primary {
-    background-color: var(--primary-color);
-    border: none;
-  }
+.btn-primary {
+  background-color: var(--primary-color);
+  border: none;
+  transition: .2s ease-in-out;
+}
 
-  .btn-primary:hover {
-    background-color: var(--secondary-color);
-  }
+.btn-primary:hover {
+  background-color: var(--secondary-color);
+}
 
-  .btn-primary:focus {
-    background-color: var(--primary-color);
-    outline: none;
-  }
+.btn-primary:focus {
+  background-color: var(--primary-color);
+  outline: none;
+}
 
-  .card-img-top {
-    height: 100%;
-    background-size: cover;
-  }
+.card-img-top {
+  height: 100%;
+  background-size: cover;
+}
 
-  .card--custom {
-    padding: 0;
-    margin-right: 1.5rem;
-  }
+.card--custom {
+  padding: 0;
+  margin-right: 1.5rem;
+}
 
-  .card__img {
-    height: 100px;
-  }
+.card__img {
+  height: 100px;
+}
 
 /*-------------------------
  *  bootstrap overridden components
@@ -192,24 +205,136 @@ home page search & headers
 .browsing__container,
 .product__container,
 .products {
-  margin-top: 7rem
+  margin-top: 7rem;
 }
 
 .products__row {
-  padding-left: .75rem;
+  padding-left: 0.75rem;
 }
 /*----------------------
  * browsing page
  * -------------------*/
 
-
 /**--------------------
  * product page
  * -------------------*/
-  .sproduct__img img {
-    width: 100%;
+
+  .left {
+    margin-bottom: var(--md-size);
   }
 
+  .right {
+    padding: var(--padding-sm);
+  }
+  .sproduct {
+    background-color: var(--neutral-color);
+    border-radius: 5px;
+    padding: var(--md-size);
+  }
+
+.sproduct__details {
+  letter-spacing: var(--letter-spacing);
+}
+
+.sproduct__title {
+  border-bottom: var(--border-color);
+  padding-bottom: var(--normal-size);
+  margin-bottom: var(--normal-size);
+}
+
+.sproduct__tally,
+.sproduct__title {
+  color: var(--title-color);
+  font-weight: var(--font-weight-lg);
+}
+
+.sproduct__description {
+  font-size: var(--font-size-md);
+  padding-top: var(--md-size);
+  margin-top: var(--normal-size);
+  border-top: var(--border-color);
+  color: var(--description-color);
+}
+.sproduct__img img {
+  width: 100%;
+}
+
+.sproduct__cart {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 3rem;
+}
+
+.sproduct__quantity {
+  font-size: var(--font-size);
+  font-weight: var(--font-weight);
+  color: var(--description-color);
+  width: 5rem;
+  height: 5rem;
+  text-align: center;
+  margin: 0 1rem;
+  border: none;
+}
+
+.sproduct__quantity:focus {
+  outline: none;
+}
+
+.sproduct__category {
+  margin-top: var(--md-size);
+}
+
+.cart__btn {
+  border-radius: 50px;
+  padding: var(--padding-sm);
+  letter-spacing: 0.16rem;
+  text-transform: uppercase;
+}
+
+.fa-cart-plus {
+  margin-right: 0.5rem;
+}
+
+.cart__increase,
+.cart__decrease {
+  background: red;
+  background-color: var(--background-color);
+  border-radius: 50px;
+  color: var(--title-color);
+  display: grid;
+  height: 5rem;
+  place-items: center;
+  width: 5rem;
+  cursor: pointer;
+}
+
+.cart__increase:hover, .cart__decrease:hover {
+  background-color: var(--description-color);
+  transition: .2s ease-in-out;
+}
+
+.category__text {
+  font-size: var(--font-size-sm);
+}
+
+.category__title {
+  padding: var(--padding-sm);
+  background-color: black;
+  color: var(--neutral-color);
+  border-radius: 50px;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
 /**--------------------
  * product page
  * -------------------*/

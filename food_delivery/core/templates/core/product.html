@@ -4,34 +4,45 @@
 {% block content %}
 <div class="container product__container">
     <div class="sproduct row">
-      <div class="left col">
+      <div class="left col-xl-6 col-lg-6 col-sm-12">
         <div class="sproduct__img">
-          <img src="{{ product.thumbnail.url  }}" alt="">
+          <img src="{{ obj.product.thumbnail.url  }}" alt="">
         </div>
       </div>
-      <div class="right col">
+      <div class="right ccolxl-6 col-lg-6 col-sm-12">
         <div class="sproduct__details">
 
           <h1 class="sproduct__title">
-            {{ product.name  }}
+            {{ obj.product.name  }}
           </h1>
 
          <div class="sproduct__tally">
             <h1 class="sproduct__price">
-              {{ product.price }}
+              {{ obj.product.price }}
             </h1>
          </div>
 
           <p class="sproduct__description">
-            {{ product.description }}
+            {{ obj.product.description }}
           </p>
 
-          <div class="sproduct__cart">
-              <div class="cart__increase"><i class="fas fa-arrow-up"></i></div>
-              <input id="quantity" type="number" name="quantity">
-              <div class="cart__decrease"><i class="fas fa-arrow-down"></i></div>
+          <div class="sproduct__category">
+            <p class="category__text">Category:
+              {% for category in obj.category.all %}
 
-              <button class="btn--primary cart__btn"><i class="fas fa-cart-plus"></i>Add to Cart</button>
+              <span class="category__title">{{ category.name }}</span>
+              {% endfor %}
+            </p>
+          </div>
+
+          <div class="sproduct__cart">
+              <div class="d-flex">
+                <div class="cart__increase"><i class="fas fa-arrow-up"></i></div>
+                <input id="quantity" type="number" name="quantity" value="1" class="sproduct__quantity">
+                <div class="cart__decrease"><i class="fas fa-arrow-down"></i></div>
+              </div>
+
+              <button class="btn-primary cart__btn"><i class="fas fa-cart-plus"></i>Add to Cart</button>
           </div>
         </div>
 

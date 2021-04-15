@@ -47,7 +47,7 @@ class Product(models.Model):
     name = models.CharField(max_length=250)
     slug = models.SlugField(blank=True)
     price = models.CharField(max_length=250)
-    description = models.CharField(max_length=1000)
+    description = models.TextField(max_length=1000)
     create_date = models.DateTimeField()
     thumbnail = models.ImageField(upload_to='uploads')
     weight = models.DecimalField(max_digits=5, decimal_places=2, default=0, help_text='in kg')

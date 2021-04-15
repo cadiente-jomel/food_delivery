@@ -25,9 +25,11 @@ def product_page(request, store, product):
     obj = Store.objects.get(slug=store)
 
     product = Product.objects.get(slug=product, store=obj)
+    
+    obj = ProductCategory.objects.get(product=product)
 
     context = {
-        "product": product,
+        "obj": obj,
     }
     return render(request, 'core/product.html', context)
 
