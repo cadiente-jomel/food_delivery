@@ -1,0 +1,39 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="store-container">
+  <div class="store__header">
+    <div class="store__cover">
+        <img class="store__cover-img" src="{{ store.store_cover.url }}" alt="">
+
+    </div>
+
+    <div class="store__relative">
+      <div class="store__profile">
+        <div>
+          <img class="store__profile-img" src="{{ store.store_profile.url }}" alt="">
+        </div>
+        <h2 class="store__profile-text text-center">{{ store.store.store_name }}</h2>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="store__product">
+
+  <div class="store__best">
+    <div class="container pb-4">
+      {% if products %}
+        <h1>Most Popular</h1>
+        {% include 'core/product_card.html' %}
+      {% else %}
+        <div class="store__none">
+          This store has not yet posted any products to sell
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+  </div>
+</div>
+{% endblock %}

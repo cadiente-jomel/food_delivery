@@ -1,0 +1,20 @@
+<div class="row products__row">
+  {% for prod in products %}
+    <div class="col-xl-3 col-sm-6 col-12 mb-4 card card--custom" style="width: 18rem;">
+      <div class="card__img">
+        <img class="card-img-top" src="{{ prod.product.thumbnail.url }}" alt="Card image cap">
+      </div>
+      <div class="card-body card__body--column">
+        <div class="card__text">
+          <h5 class="card-title">{{ prod.product.name|truncatechars:43 }}</h5>
+          <p class="product__price">₱ {{ prod.product.price }}</p>
+        </div>
+        <div class="card__btn">
+        <p>Ratings here</p>
+        <a href="{{ prod.get_absolute_url }}" class="btn btn-primary card-read">READ MORE</a>
+        <a href="{{ prod.get_absolute_url }}" class="btn card-add"><i class="fas fa-cart-plus"></i></a>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>
