@@ -4,7 +4,6 @@ const productQuantity = document.getElementById('quantity');
 const addToCartBtn = document.getElementById('add-to-cart');
 
 
-
 //CSRFToken
 const getCookie = (name) => {
     let cookieValue = null;
@@ -26,17 +25,33 @@ const csrftoken = getCookie('csrftoken');
 
 // Ajax calls
 const addToCart = () => {
+
+    const productName = document.querySelector('.sproduct__title');
+    const productSold = document.getElementById('sproduct__sold');
+    const productSuccess = document.querySelector('.product__success');
+
+    data = {
+        "productName": productName.innerText,
+        "productSold": productSold.value
+    }
     fetch('/add-cart/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'X-CSRFToken': csrftoken,
         },
-        body: JSON.stringify({"name": "Jomel Cadiente"})
+        body: JSON.stringify(data)
     }).then(res => {
         return res.json()
     }).then(result => {
-        console.log(result)
+        console.log(result);
+        productSuccess.innerText = result['message'];
+        productSuccess.style.top = '0';
+        
+        setTimeout(() => {
+            productSuccess.style.top = '-3.4rem';
+        }, 2000);
+
     })
 }
 // Ajax Calls

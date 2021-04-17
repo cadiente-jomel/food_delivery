@@ -2,6 +2,7 @@
 
 
 {% block content %}
+<p class="product__success">Added to cart</p>
 <div class="container product__container">
     <div class="sproduct row">
       <div class="left col-xl-6 col-lg-6 col-sm-12">
@@ -33,6 +34,7 @@
               <span class="category__title">{{ category.name }}</span>
               {% endfor %}
             </p>
+            <p id="sproduct__sname">{{ obj.product.store.store_name }}</p>
           </div>
 
           <div class="sproduct__cart">
@@ -41,7 +43,7 @@
                 <input id="quantity" type="number" name="quantity" value="1" class="sproduct__quantity">
                 <div class="cart__decrease"><i class="fas fa-arrow-down"></i></div>
               </div>
-
+              <input id="sproduct__sold" type="hidden" name="" value="{{ obj.product.store.slug  }}">
               <button id="add-to-cart" class="btn-primary cart__btn"><i class="fas fa-cart-plus"></i>Add to Cart</button>
           </div>
         </div>

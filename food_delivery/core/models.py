@@ -12,7 +12,7 @@ class Store(models.Model):
     customer = models.OneToOneField(Customer, on_delete=models.CASCADE)
     store_name = models.CharField(max_length=250, help_text=store_help_text)
     location = models.CharField(max_length=500)
-    slug = models.SlugField(blank=True)
+    slug = models.SlugField(blank=True, max_length=500)
 
     def __str__(self):
         return self.store_name
@@ -45,7 +45,7 @@ class StoreProfile(models.Model):
 class Product(models.Model):
     store = models.ForeignKey(Store, on_delete=models.CASCADE)
     name = models.CharField(max_length=250)
-    slug = models.SlugField(blank=True)
+    slug = models.SlugField(blank=True, max_length=500)
     price = models.CharField(max_length=250)
     description = models.TextField(max_length=1000)
     create_date = models.DateTimeField()

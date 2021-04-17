@@ -1,6 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
-from .models import  Store, StoreProfile, ProductCategory, Product
+from django.utils.text import slugify
+import json
+
+from .models import  Store, StoreProfile, ProductCategory, Product, Cart
 # Create your views here.
 
 # page views !
@@ -53,7 +56,22 @@ def store_page(request, store):
 
 # ajax part!
 def cart_add(request):
+
+    payload = json.loads(request.body.decode('utf-8'))
+    
+    product_slug = slugify(payload.get('productName'))
     if request.user.is_authenticated:
-        return JsonResponse({'data': 'Added to cart'})
+        try:
+            store_name = Store.objects.get(slug=payload.get('productSold'))
+            product = Product.objects.get(slug=product_slug, store=store_name)
+            cart = Cart.objects.create(product=product, customer=request.user)
+
+            print(cart)
+            print(store_name)
+        except Exception as e:
+            print(e)
+
+        return JsonResponse({'message': 'Product added to your cart'})
+
     return JsonResponse({'message': 'Not Logged in'})
 
