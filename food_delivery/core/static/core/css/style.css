@@ -107,6 +107,11 @@ body {
   height: 100px;
 }
 
+.danger {
+  font-weight: var(--font-weight-lg);
+  font-size: var(--font-size-md);
+}
+
 /*-------------------------
  *  bootstrap overridden components
  *  ----------------------- */
@@ -360,6 +365,10 @@ home page search & headers
   border-radius: 5px;
   top: -3.4rem;
   transition: .2s ease-in-out;
+}
+
+#sproduct__sname {
+  font-size: var(--font-size-sm);
 }
 
 /* Chrome, Safari, Edge, Opera */

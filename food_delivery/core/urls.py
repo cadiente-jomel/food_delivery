@@ -8,7 +8,6 @@ urlpatterns = [
     path('stores/<str:store>/', views.store_page, name='store-page'),
     path('cart/<str:user>/', views.cart_page, name='cart-page'),
     path('profile/<str:user>/', views.profile_page, name='profile-page'),
-
     # ajax links
     path('add-cart/', views.cart_add, name='add-cart')
 ]

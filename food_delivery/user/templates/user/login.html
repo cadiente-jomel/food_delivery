@@ -1,0 +1,16 @@
+{% extends 'user/base.html' %}
+
+{% block content %}
+<p class="product__success"></p>
+
+<p>Login Page</p>
+
+<form action="" method="POST">
+  {% csrf_token %}
+  <input id="name" type="email" name="email">
+  <input id="password" type="password" name="password">
+  <input type="submit" value="Submit">
+
+</form>
+
+{% endblock %}

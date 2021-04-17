@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.utils.text import slugify
 import json
@@ -58,20 +58,32 @@ def store_page(request, store):
 def cart_add(request):
 
     payload = json.loads(request.body.decode('utf-8'))
-    
+
     product_slug = slugify(payload.get('productName'))
+    product_name = payload.get('productName')
+    product_sold = payload.get('productSold')
+    quantity = int(payload.get('productQuantity'))
     if request.user.is_authenticated:
+        store_name = Store.objects.get(slug=product_sold)
+        product = Product.objects.get(slug=product_slug, store=store_name)
         try:
-            store_name = Store.objects.get(slug=payload.get('productSold'))
-            product = Product.objects.get(slug=product_slug, store=store_name)
-            cart = Cart.objects.create(product=product, customer=request.user)
+            cart_check = Cart.objects.get(product=product, customer=request.user)
+            cart_check.quantity += quantity
+            cart_check.save()
+        except Cart.DoesNotExist:
+            cart = Cart.objects.create(product=product, customer=request.user, quantity=quantity)
 
-            print(cart)
-            print(store_name)
-        except Exception as e:
-            print(e)
+        return JsonResponse({'message': 'Product added to your cart', 'isLogged': True})
 
-        return JsonResponse({'message': 'Product added to your cart'})
+    # data = {
+        # "productName": product_name,
+        # "productSold": product_sold,
+        # "quantity": quantity
+    # }
 
-    return JsonResponse({'message': 'Not Logged in'})
-
+    # response = JsonResponse({'message': 'Not Logged in'})
+    # response.set_cookie('cart', data)
+    # if 'cart' in response.cookies:
+        # response.cookies['cart']['samesite'] = 'Lax'
+        # response.cookies['cart']['httponly'] = True
+    return JsonResponse({'message': 'Not Logged in',  'islogged': False})

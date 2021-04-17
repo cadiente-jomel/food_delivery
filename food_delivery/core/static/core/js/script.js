@@ -1,7 +1,3 @@
-const quantityIncrease = document.querySelector('.cart__increase');
-const quantityDecrease = document.querySelector('.cart__decrease');
-const productQuantity = document.getElementById('quantity');
-const addToCartBtn = document.getElementById('add-to-cart');
 
 
 //CSRFToken
@@ -28,11 +24,13 @@ const addToCart = () => {
 
     const productName = document.querySelector('.sproduct__title');
     const productSold = document.getElementById('sproduct__sold');
+    const productQuantity = document.getElementById('quantity');
     const productSuccess = document.querySelector('.product__success');
 
     data = {
         "productName": productName.innerText,
-        "productSold": productSold.value
+        "productSold": productSold.value,
+        "productQuantity": productQuantity.value
     }
     fetch('/add-cart/', {
         method: 'POST',
@@ -45,6 +43,10 @@ const addToCart = () => {
         return res.json()
     }).then(result => {
         console.log(result);
+
+        if (!result['isLogged']) {
+            window.location.href = '/login';
+        }
         productSuccess.innerText = result['message'];
         productSuccess.style.top = '0';
         
@@ -56,33 +58,40 @@ const addToCart = () => {
 }
 // Ajax Calls
 // Event listeners
-quantityIncrease.addEventListener('click', () => {
-    let value = productQuantity.value;
-    productQuantity.value = parseInt(value) + 1;
-});
-quantityDecrease.addEventListener('click', () => {
-    let value = productQuantity.value;
-    if (value > 1) {
-        productQuantity.value = parseInt(value) - 1;
-    }
 
-    if (value < 2) {
-        quantityDecrease.style.cursor = 'not-allowed';
-    } else {
-        quantityDecrease.style.cursor = 'pointer';
-    }
-});
+const eventListeners = () => {
+    const quantityIncrease = document.querySelector('.cart__increase');
+    const quantityDecrease = document.querySelector('.cart__decrease');
+    const productQuantity = document.getElementById('quantity');
+    const addToCartBtn = document.getElementById('add-to-cart');
+    quantityIncrease.addEventListener('click', () => {
+        let value = productQuantity.value;
+        productQuantity.value = parseInt(value) + 1;
+    });
+    quantityDecrease.addEventListener('click', () => {
+        let value = productQuantity.value;
+        if (value > 1) {
+            productQuantity.value = parseInt(value) - 1;
+        }
 
-quantityDecrease.addEventListener('mouseover', () => {
-    let value = productQuantity.value;
-    if (value < 2) {
-        quantityDecrease.style.cursor = 'not-allowed';
-    } else {
-        quantityDecrease.style.cursor = 'pointer';
-    }
-});
+        if (value < 2) {
+            quantityDecrease.style.cursor = 'not-allowed';
+        } else {
+            quantityDecrease.style.cursor = 'pointer';
+        }
+    });
 
-addToCartBtn.addEventListener('click', addToCart);
+    quantityDecrease.addEventListener('mouseover', () => {
+        let value = productQuantity.value;
+        if (value < 2) {
+            quantityDecrease.style.cursor = 'not-allowed';
+        } else {
+            quantityDecrease.style.cursor = 'pointer';
+        }
+    });
+
+    addToCartBtn.addEventListener('click', addToCart);
+}
 // Event listeners
 
-
+eventListeners();
