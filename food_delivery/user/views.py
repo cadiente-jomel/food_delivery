@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
+from django.http import JsonResponse
 
-from .forms import CustomerRegisterForm
+import json
+
+from .forms import CustomerRegisterForm, CustomerForm, CustomerProfileForm
 # Create your views here.
 
 def register_page(request):
@@ -37,3 +40,30 @@ def login_page(request):
 
 def logout_page(request):
     logout(request)
+
+def profile_page(request):
+    customer_form = CustomerForm(instance=request.user)
+    context = {
+        'customer_form': customer_form,
+    }
+    return render(request, 'user/profile.html', context)
+
+def profile_photo(request):
+    pass
+
+
+# Ajax
+def profile_upload(request):
+    if request.method == 'POST':
+        payload = json.loads(request.body.decode('utf-8'))
+        customer_data = {
+            'first_name': payload.get('firstName'),
+            'last_name': payload.get('lastName')
+        }
+
+        customer_form = CustomerForm(customer_data, instance=request.user)
+        if customer_form.is_valid():
+            customer_form.save()
+            return JsonResponse({'message': 'Profile Updated'})
+    return JsonResponse({'message': 'error'})
+# Ajax

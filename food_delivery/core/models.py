@@ -23,7 +23,7 @@ class Store(models.Model):
         self.slug = slugify(self.store_name)
 
     def get_absolute_url(self):
-        return reverse('store-page', args=[self.slug])
+        return reverse('core:store-page', args=[self.slug])
 
 class StoreProfile(models.Model):
     store = models.OneToOneField(Store, on_delete=models.CASCADE)
@@ -85,7 +85,7 @@ class ProductCategory(models.Model):
         return self.product.name
 
     def get_absolute_url(self):
-        return reverse('product-page', args=[self.product.store.slug, self.product.slug])
+        return reverse('core:product-page', args=[self.product.store.slug, self.product.slug])
 
     class Meta:
         verbose_name_plural = 'Products has Categories'

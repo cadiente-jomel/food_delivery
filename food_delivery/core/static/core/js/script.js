@@ -1,4 +1,4 @@
-
+'use-strict';
 
 //CSRFToken
 const getCookie = (name) => {
