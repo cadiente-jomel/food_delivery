@@ -6,6 +6,18 @@
 <form id="form">
   {{ customer_form }}
   <input type="submit" value="Save Profile">
-
 </form>
+
+<form class="form__address" action="">
+  {{ address_form  }}
+
+  <input type="submit" value="Add address">
+</form>
+
+<div class="address">
+  {% for address in address_book %}
+
+  <p>{{address.house_no}}</p>
+  {% endfor %}
+</div>
 {% endblock %}

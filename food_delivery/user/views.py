@@ -4,7 +4,9 @@ from django.http import JsonResponse
 
 import json
 
-from .forms import CustomerRegisterForm, CustomerForm, CustomerProfileForm
+from .forms import CustomerRegisterForm, CustomerForm, CustomerProfileForm, CustomerShippingAddressForm
+
+from core.models import CustomerShippingAddress
 # Create your views here.
 
 def register_page(request):
@@ -43,8 +45,13 @@ def logout_page(request):
 
 def profile_page(request):
     customer_form = CustomerForm(instance=request.user)
+    customer_address_form = CustomerShippingAddressForm()
+
+    address_book = CustomerShippingAddress.objects.filter(customer=request.user)
     context = {
         'customer_form': customer_form,
+        'address_form': customer_address_form,
+        'address_book': address_book,
     }
     return render(request, 'user/profile.html', context)
 

@@ -24,4 +24,4 @@ class CustomerProfileForm(forms.ModelForm):
 class CustomerShippingAddressForm(forms.ModelForm):
     class Meta:
         model = CustomerShippingAddress
-        fields = '__all__'
+        fields = ['phone', 'house_no', 'zip_code', 'province', 'city_municipality', 'barangay']
