@@ -12,6 +12,7 @@
   --normal-size: 2rem;
   --md-size: 3rem;
   --margin-sm: 0.3rem;
+  --margin-default: 1rem;
 
   --border-color: 1px solid black;
   --border-input: 1px solid var(--tertiary-color);

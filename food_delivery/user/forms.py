@@ -16,11 +16,13 @@ class CustomerForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
 
         self.fields['first_name'].widget.attrs.update({
-            'class': 'profile__input'
+            'class': 'profile__input',
+            'disabled': True
         })
 
         self.fields['last_name'].widget.attrs.update({
-            'class': 'profile__input'
+            'class': 'profile__input',
+            'disabled': True
         })
 
     class Meta:

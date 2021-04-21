@@ -1,4 +1,6 @@
-.address__customer, .customer__profile, .address {
+.address__customer,
+.customer__profile,
+.address {
   margin-top: var(--md-size);
 }
 
@@ -6,15 +8,41 @@
   flex-direction: column;
 }
 
-
 .input__border {
-  padding: var(--padding-sm);
   background: white;
-  border-radius: 5px;
   border: var(--border-input);
+  border-radius: 5px;
+  padding: var(--padding-sm);
 }
 
-.address__input, .profile__input {
+.first_name,
+.last_name {
+  border-bottom-right-radius: 0;
+  border-right: none;
+  border-top-right-radius: 0;
+}
+
+.address__input,
+.profile__input {
   border: none;
   width: 100%;
+  font-size: var(--font-size-sm);
+  background: none;
+}
+
+.profile__edit {
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  display: grid;
+  place-items: center;
+}
+
+.address__input:focus,
+.profile__input:focus {
+  outline: none;
+}
+
+.add__address--top,
+.profile__save {
+  margin-top: var(--margin-default);
 }

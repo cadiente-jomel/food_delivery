@@ -45,6 +45,11 @@ const eventListener = () => {
     const form = document.getElementById('form');
     const addressBtn = document.querySelector('.address__btn');
     const addressForm = document.querySelector('.address__form');
+    const profileEditBtn = document.querySelectorAll('.profile__edit');
+
+    const lastName = document.getElementById('id_first_name');
+    const firstName = document.getElementById('id_last_name');
+
     form.addEventListener('submit', e => {
         e.preventDefault();
         profileUpload();
@@ -64,6 +69,20 @@ const eventListener = () => {
 
         }
     });
+
+    profileEditBtn.forEach(btn => {
+        btn.addEventListener('click', () => {
+            if(btn.classList.contains('enable')) {
+                btn.classList.remove('enable');
+                
+                btn.previousElementSibling.children[0].disabled = true;
+            } else {
+                btn.classList.add('enable');
+                btn.previousElementSibling.children[0].disabled = false;
+            }
+        });
+    });
+
 }
 
 eventListener();

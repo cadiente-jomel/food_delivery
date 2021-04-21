@@ -8,18 +8,24 @@
     <form id="form">
       <div class="customer__first">
         {{ customer_form.first_name.label_tag }}
-        <div class="input__border first_name">
-          {{ customer_form.first_name }}
+        <div class="d-flex input__container">
+          <div class="input__border first_name">
+            {{ customer_form.first_name }}
+          </div>
+            <div class="profile__edit btn btn-primary"><i class="fas fa-pencil-alt"></i></div>
         </div>
       </div>
 
       <div class="customer__last">
         {{ customer_form.last_name.label_tag }}
-        <div class="input__border last_name">
-          {{ customer_form.last_name }}
+        <div class="d-flex input__container">
+          <div class="input__border last_name">
+            {{ customer_form.last_name }}
+          </div>
+            <div class="profile__edit btn btn-primary"><i class="fas fa-pencil-alt"></i></div>
         </div>
       </div>
-      <input type="submit" value="Save Profile">
+      <input class="btn btn-primary profile__save"type="submit" value="Save Profile">
     </form>
   </div>
 
@@ -80,7 +86,9 @@
           </div>
         </div>
 
-        <input type="submit" value="Add address">
+        <div class="btn__container add__address--top d-flex justify-content-end">
+          <input class="btn btn-primary"type="submit" value="Add address">
+        </div>
 
         </div>
       </form>
