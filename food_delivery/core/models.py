@@ -112,13 +112,14 @@ class Cart(models.Model):
 
 class CustomerShippingAddress(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    full_name = models.CharField(max_length=400, blank=True)
+    full_name = models.CharField(max_length=400)
     phone = models.IntegerField()
     house_no = models.CharField(max_length=100)
     zip_code = models.CharField(max_length=15)
     province = models.CharField(max_length=60)
     city_municipality = models.CharField(max_length=80)
     barangay = models.CharField(max_length=50)
+    note = models.CharField(max_length=500, blank=True)
 
     def __str__(self):
         return f'{self.customer.get_fullname} address'

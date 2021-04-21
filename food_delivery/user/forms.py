@@ -50,6 +50,11 @@ class CustomerShippingAddressForm(forms.ModelForm):
             'autocomplete': 'off'
         })
 
+        self.fields['note'].widget.attrs.update({
+            'class': 'address__input',
+            'placeholder': 'Please enter your notes'
+        })
+
         self.fields['house_no'].widget.attrs.update({
             'class': 'address__input',
             'placeholder': 'House No.',
@@ -84,4 +89,4 @@ class CustomerShippingAddressForm(forms.ModelForm):
 
     class Meta:
         model = CustomerShippingAddress
-        fields = ['full_name', 'phone', 'house_no', 'zip_code', 'province', 'city_municipality', 'barangay']
+        fields = ['full_name', 'phone', 'note', 'house_no', 'zip_code', 'province', 'city_municipality', 'barangay']
