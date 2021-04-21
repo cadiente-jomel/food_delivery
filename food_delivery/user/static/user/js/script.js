@@ -45,10 +45,12 @@ const eventListener = () => {
     const form = document.getElementById('form');
     const addressBtn = document.querySelector('.address__btn');
     const addressForm = document.querySelector('.address__form');
-    const profileEditBtn = document.querySelectorAll('.profile__edit');
 
     const lastName = document.getElementById('id_first_name');
     const firstName = document.getElementById('id_last_name');
+
+    const profileSave = document.querySelector('.profile__save');
+    const profileEdit = document.querySelector('.edit__btn');
 
     form.addEventListener('submit', e => {
         e.preventDefault();
@@ -61,6 +63,7 @@ const eventListener = () => {
             addressForm.classList.add('d-none')
             addressForm.classList.remove('active');
             addressBtn.innerHTML = `<i class="fas fa-plus"></i> Add Address`
+
         } else {
             addressBtn.innerHTML = `<i class="fas fa-times"></i> Cancel`
             addressForm.classList.add('active')
@@ -70,18 +73,25 @@ const eventListener = () => {
         }
     });
 
-    profileEditBtn.forEach(btn => {
-        btn.addEventListener('click', () => {
-            if(btn.classList.contains('enable')) {
-                btn.classList.remove('enable');
-                
-                btn.previousElementSibling.children[0].disabled = true;
-            } else {
-                btn.classList.add('enable');
-                btn.previousElementSibling.children[0].disabled = false;
-            }
-        });
-    });
+    profileEdit.addEventListener('click', () => {
+        if (profileEdit.classList.contains('edit')) {
+            profileSave.style.backgroundColor = '#9796AA';
+            profileSave.disabled = true;
+            profileEdit.classList.remove('edit');
+            profileEdit.innerHTML = 'Edit';
+
+            firstName.disabled = true;
+            lastName.disabled = true;
+        } else {
+            profileSave.style.backgroundColor = 'var(--primary-color)';
+            profileSave.disabled = false;
+            profileEdit.innerHTML = `<i class="fas fa-times"></i>`;
+            profileEdit.classList.add('edit');
+
+            firstName.disabled = false;
+            lastName.disabled = false;
+        }
+    })
 
 }
 

@@ -12,29 +12,36 @@
   background: white;
   border: var(--border-input);
   border-radius: 5px;
+  margin-bottom: var(--margin-default);
   padding: var(--padding-sm);
 }
 
-.first_name,
-.last_name {
-  border-bottom-right-radius: 0;
-  border-right: none;
-  border-top-right-radius: 0;
+
+.customer__last label {
+  margin-top: var(--margin-default);
 }
 
-.address__input,
-.profile__input {
-  border: none;
-  width: 100%;
-  font-size: var(--font-size-sm);
-  background: none;
+.profile__save:disabled {
+  background-color: #9796AA;
+  cursor: not-allowed;
 }
 
 .profile__edit {
-  border-bottom-left-radius: 0;
-  border-top-left-radius: 0;
-  display: grid;
-  place-items: center;
+  align-items: center;
+  display: flex;
+}
+
+.profile__edit span {
+  margin-left: var(--margin-sm);
+}
+
+
+.address__input,
+.profile__input {
+  background: none;
+  border: none;
+  font-size: var(--font-size-sm);
+  width: 100%;
 }
 
 .address__input:focus,
@@ -42,7 +49,6 @@
   outline: none;
 }
 
-.add__address--top,
-.profile__save {
+.add__address--top {
   margin-top: var(--margin-default);
 }
