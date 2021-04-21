@@ -43,10 +43,26 @@ const profileUpload = () => {
 
 const eventListener = () => {
     const form = document.getElementById('form');
-
+    const addressBtn = document.querySelector('.address__btn');
+    const addressForm = document.querySelector('.address__form');
     form.addEventListener('submit', e => {
         e.preventDefault();
         profileUpload();
+    });
+
+    addressBtn.addEventListener('click', e => {
+        if(addressForm.classList.contains('active')) {
+            addressBtn.innerHTML = `Add address`
+            addressForm.classList.add('d-none')
+            addressForm.classList.remove('active');
+            addressBtn.innerHTML = `<i class="fas fa-plus"></i> Add Address`
+        } else {
+            addressBtn.innerHTML = `<i class="fas fa-times"></i> Cancel`
+            addressForm.classList.add('active')
+            addressForm.classList.remove('d-none');
+            addressForm.style.display = 'flex';
+
+        }
     });
 }
 

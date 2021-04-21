@@ -2,22 +2,119 @@
 
 
 {% block content %}
-<h1>Profile Page</h1>
-<form id="form">
-  {{ customer_form }}
-  <input type="submit" value="Save Profile">
-</form>
+<div class="container">
+  <div class="customer__profile">
+    <h4>Customer Profile</h4>
+    <form id="form">
+      <div class="customer__first">
+        {{ customer_form.first_name.label_tag }}
+        <div class="input__border first_name">
+          {{ customer_form.first_name }}
+        </div>
+      </div>
 
-<form class="form__address" action="">
-  {{ address_form  }}
+      <div class="customer__last">
+        {{ customer_form.last_name.label_tag }}
+        <div class="input__border last_name">
+          {{ customer_form.last_name }}
+        </div>
+      </div>
+      <input type="submit" value="Save Profile">
+    </form>
+  </div>
 
-  <input type="submit" value="Add address">
-</form>
+  <div class="address">
+    <div class="address__form d-none">
+      <h4>Add Address</h4>
+      <form class="row" action="">
+        <div class="left col">
+          <div class="address__name">
+            {{ address_form.full_name.label_tag }}
+            <div class="input__border full_name">
+              {{ address_form.full_name  }}
+            </div>
+          </div>
 
-<div class="address">
-  {% for address in address_book %}
+          <div class="address__phone">
+            {{ address_form.phone.label_tag }}
+            <div class="input__border phone">
+              {{ address_form.phone  }}
+            </div>
+          </div>
+        </div>
 
-  <p>{{address.house_no}}</p>
-  {% endfor %}
+        <div class="right col">
+
+        <div class="address__houseno">
+          {{ address_form.house_no.label_tag }}
+          <div class="input__border houseno">
+            {{ address_form.house_no  }}
+          </div>
+        </div>
+
+        <div class="address__zipcode">
+          {{ address_form.zip_code.label_tag }}
+          <div class="input__border zipcode">
+            {{ address_form.zip_code  }}
+          </div>
+        </div>
+
+        <div class="address__province">
+          {{ address_form.province.label_tag }}
+          <div class="input__border province">
+            {{ address_form.province  }}
+          </div>
+        </div>
+
+        <div class="address__city_municipality">
+          {{ address_form.city_municipality.label_tag }}
+          <div class="input__border city_municipality">
+            {{ address_form.city_municipality  }}
+          </div>
+        </div>
+
+        <div class="address__barangay">
+          {{ address_form.barangay.label_tag }}
+          <div class="input__border barangay">
+            {{ address_form.barangay }}
+          </div>
+        </div>
+
+        <input type="submit" value="Add address">
+
+        </div>
+      </form>
+    </div>
+
+    <div class="address__customer">
+      <h4>Address Book</h4>
+      {% for address in address_book %}
+
+        <table class="table">
+          <thead class="table-light">
+            <tr>
+              <th scope="col">First Name</th>
+              <th scope="col">Address</th>
+              <th scope="col">Postcode</th>
+              <th scope="col">Mobile Number</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">{{ address.full_name }}</th>
+              <td>{{ address.house_no }} {{address.barangay}} {{ address.city_municipality  }} {{ address.province }}</td>
+              <td>{{ address.zip_code }}</td>
+              <td>{{ address.mobile_number }}</td>
+              <td><a href="#">Edit</a></td>
+            </tr>
+          </tbody>
+        </table>
+      {% endfor %}
+      <div class="btn__container d-flex justify-content-end">
+        <button class="btn btn-primary address__btn"><i class="fas fa-plus"></i> Add Adress</button>
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock %}

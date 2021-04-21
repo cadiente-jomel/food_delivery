@@ -1,0 +1,74 @@
+:root {
+  --background-color: #f1f2f7;
+  --overlay-color: rgba(22, 29, 32, 0.6);
+  --neutral-color: #fff;
+  --neutral-color-darker: #d8e3e7;
+  --primary-color: #e31c1b;
+  --secondary-color: #bd4020;
+  --tertiary-color: #16d39a;
+  --title-color: #505050;
+  --description-color: #979797;
+
+  --normal-size: 2rem;
+  --md-size: 3rem;
+  --margin-sm: 0.3rem;
+
+  --border-color: 1px solid black;
+  --border-input: 1px solid var(--tertiary-color);
+
+  --font-weight-lg: 700;
+
+  --padding-sm: 0.5rem 2rem;
+
+  --font-size-sm: 1.2rem;
+  --font-size-md: 1.3rem;
+  --font-size: 1.6rem;
+
+  --letter-spacing-sm: 0.2rem;
+  --letter-spacing: 0.16rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  background-color: var(--background-color);
+  font-family: "Montserrat", sans-serif;
+  height: 100vh;
+}
+
+.container-home {
+  height: 100%;
+}
+
+/* -------------------
+ * bootstrap overriden components
+ * -------------------*/
+
+.btn-primary {
+  background-color: var(--primary-color);
+  border: none;
+  transition: 0.2s ease-in-out;
+}
+
+.btn-primary:hover {
+  background-color: var(--secondary-color);
+}
+
+.btn-primary:focus {
+  background-color: var(--primary-color);
+  outline: none;
+}
+
+/* -------------------
+ * bootstrap overriden components
+ * -------------------*/

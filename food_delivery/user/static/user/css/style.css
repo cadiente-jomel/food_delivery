@@ -1,0 +1,20 @@
+.address__customer, .customer__profile, .address {
+  margin-top: var(--md-size);
+}
+
+.active {
+  flex-direction: column;
+}
+
+
+.input__border {
+  padding: var(--padding-sm);
+  background: white;
+  border-radius: 5px;
+  border: var(--border-input);
+}
+
+.address__input, .profile__input {
+  border: none;
+  width: 100%;
+}
