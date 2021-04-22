@@ -33,7 +33,7 @@
   <div class="address">
     <div class="address__form d-none">
       <h4>Add Address</h4>
-      <form class="row" action="">
+      <form class="row form__add" action="">
         <div class="left col">
           <div class="address__name">
             {{ address_form.full_name.label_tag }}
@@ -104,7 +104,6 @@
 
     <div class="address__customer">
       <h4>Address Book</h4>
-      {% for address in address_book %}
 
         <table class="table">
           <thead class="table-light">
@@ -117,16 +116,17 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">{{ address.full_name }}</th>
-              <td>{{ address.house_no }} {{address.barangay}} {{ address.city_municipality  }} {{ address.province }}</td>
-              <td>{{ address.zip_code }}</td>
-              <td>{{ address.phone }}</td>
-              <td><a href="#">Edit</a></td>
-            </tr>
+            {% for address in address_book %}
+              <tr>
+                <th scope="row">{{ address.full_name }}</th>
+                <td>{{ address.house_no }} {{address.barangay}} {{ address.city_municipality  }} {{ address.province }}</td>
+                <td>{{ address.zip_code }}</td>
+                <td>{{ address.phone }}</td>
+                <td><a href="#">Edit</a></td>
+              </tr>
+            {% endfor %}
           </tbody>
         </table>
-      {% endfor %}
       <div class="btn__container d-flex justify-content-end">
         <button class="btn btn-primary address__btn"><i class="fas fa-plus"></i> Add Adress</button>
       </div>

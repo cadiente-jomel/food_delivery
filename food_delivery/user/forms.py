@@ -85,8 +85,8 @@ class CustomerShippingAddressForm(forms.ModelForm):
             'autocomplete': 'off'
         })
 
-
+        
 
     class Meta:
         model = CustomerShippingAddress
-        fields = ['full_name', 'phone', 'note', 'house_no', 'zip_code', 'province', 'city_municipality', 'barangay']
+        fields = ['customer','full_name', 'phone', 'note', 'house_no', 'zip_code', 'province', 'city_municipality', 'barangay']

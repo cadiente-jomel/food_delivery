@@ -119,7 +119,7 @@ class CustomerShippingAddress(models.Model):
     province = models.CharField(max_length=60)
     city_municipality = models.CharField(max_length=80)
     barangay = models.CharField(max_length=50)
-    note = models.CharField(max_length=500, blank=True)
+    note = models.CharField(max_length=500, blank=True, null=True)
 
     def __str__(self):
         return f'{self.customer.get_fullname} address'

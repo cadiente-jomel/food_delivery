@@ -19,6 +19,8 @@ const getCookie = (name) => {
 }
 const csrftoken = getCookie('csrftoken');
 // CSRFToken
+
+// AJAX
 const profileUpload = () => {
 
     const firstName = document.getElementById('id_first_name')
@@ -41,10 +43,45 @@ const profileUpload = () => {
     });
 }
 
+const addAddress = () => {
+    const form = document.querySelector('.form__add');
+    let formData= new FormData(form);
+    let data = {};
+
+    for(let d of formData) {
+        data[d[0]] = d[1];
+    }
+
+    if(data['note'].length === 0) {
+        data['note'] = null;
+    }
+
+    fetch('/add_address/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken
+        },
+        body: JSON.stringify(data)
+    })
+        .then(response => {
+            return response.json();
+        })
+        .then(result => {
+            let addressData = JSON.parse(result.data);
+            console.log(resutl.message);
+        });
+
+}
+
+// AJAX
+
 const eventListener = () => {
     const form = document.getElementById('form');
     const addressBtn = document.querySelector('.address__btn');
     const addressForm = document.querySelector('.address__form');
+
+    const formAdd = document.querySelector('.form__add')
 
     const lastName = document.getElementById('id_first_name');
     const firstName = document.getElementById('id_last_name');
@@ -92,6 +129,12 @@ const eventListener = () => {
             lastName.disabled = false;
         }
     })
+
+    formAdd.addEventListener('submit', e => {
+        e.preventDefault();
+
+        addAddress();
+    });
 
 }
 

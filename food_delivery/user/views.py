@@ -6,6 +6,7 @@ import json
 
 from .forms import CustomerRegisterForm, CustomerForm, CustomerProfileForm, CustomerShippingAddressForm
 
+from .models import Customer
 from core.models import CustomerShippingAddress
 # Create your views here.
 
@@ -73,4 +74,16 @@ def profile_upload(request):
             customer_form.save()
             return JsonResponse({'message': 'Profile Updated'})
     return JsonResponse({'message': 'error'})
+
+def add_address(request):
+    payload = request.body.decode('utf-8')
+    data = json.loads(payload)
+    form = CustomerShippingAddressForm(data)
+    form.data['customer'] = request.user
+
+
+    if form.is_valid():
+        form.save()
+        return JsonResponse({'message': 'Address Added', 'data': payload})
+    return JsonResponse({'message': 'Error occured'})
 # Ajax
