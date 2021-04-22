@@ -20,6 +20,24 @@ const getCookie = (name) => {
 const csrftoken = getCookie('csrftoken');
 // CSRFToken
 
+const newAddressRender = (data) => {
+    const tableBody = document.getElementById('table-body');
+
+    let { full_name, phone, house_no, zip_code, province, city_municipality, barangay  } = data;
+
+    let tableRow = `
+              <tr>
+                <th scope="row">${full_name}</th>
+                <td>${house_no} ${barangay} ${city_municipality} ${province}</td>
+                <td>${zip_code}</td>
+                <td>${phone}</td>
+                <td><a href="#">Edit</a></td>
+              </tr>
+    `;
+
+    tableBody.innerHTML += tableRow;
+}
+
 // AJAX
 const profileUpload = () => {
 
@@ -69,7 +87,8 @@ const addAddress = () => {
         })
         .then(result => {
             let addressData = JSON.parse(result.data);
-            console.log(resutl.message);
+            newAddressRender(addressData);
+            console.log(result.message);
         });
 
 }
