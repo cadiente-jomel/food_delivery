@@ -1,3 +1,4 @@
+from django.core import serializers
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.http import JsonResponse
@@ -86,4 +87,14 @@ def add_address(request):
         form.save()
         return JsonResponse({'message': 'Address Added', 'data': payload})
     return JsonResponse({'message': 'Error occured'})
+
+def edit_address(request, pk):
+    address = CustomerShippingAddress.objects.get(pk=pk)
+    serialize = serializers.serialize('json', [address, ], fields=('full_name', 'phone', 'house_no', 'zip_code', 'province', 'city_municipality', 'barangay', 'note'))
+    
+    obj = json.loads(serialize)
+
+    data = json.dumps(obj[0])
+
+    return JsonResponse(data, safe=False)
 # Ajax

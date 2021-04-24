@@ -122,7 +122,7 @@
                 <td>{{ address.house_no }} {{address.barangay}} {{ address.city_municipality  }} {{ address.province }}</td>
                 <td>{{ address.zip_code }}</td>
                 <td>{{ address.phone }}</td>
-                <td><a href="#">Edit</a></td>
+                <td><span class="edit-address" data-id="{{ address.pk }}">Edit</span></td>
               </tr>
             {% endfor %}
           </tbody>

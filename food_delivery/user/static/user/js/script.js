@@ -93,6 +93,52 @@ const addAddress = () => {
 
 }
 
+const editAddress = (data=false) => {
+    const addressForm = document.querySelector('.address__form');
+    const addressBtn = document.querySelector('.address__btn');
+
+    if(data) {
+        let { fields } = JSON.parse(data);
+
+        let { full_name, phone, note, house_no, zip_code, province, city_municipality, barangay  } = fields
+
+        const customerFullName = document.getElementById('id_full_name');
+        const customerPhone = document.getElementById('id_phone');
+        const customerNote = document.getElementById('id_note');
+        const customerHouseNo = document.getElementById('id_house_no');
+
+        const customerZipCode = document.getElementById('id_zip_code');
+        const customerProvince = document.getElementById('id_province');
+        const customerCityMunicipality = document.getElementById('id_city_municipality');
+        const customerBarangay = document.getElementById('id_barangay');
+
+
+        customerFullName.value = full_name;
+        customerPhone.value = phone;
+        customerNote.value = note;
+        customerHouseNo.value = house_no;
+        customerZipCode.value = zip_code;
+        customerProvince.value = province;
+        customerCityMunicipality.value = city_municipality;
+        customerBarangay.value = barangay;
+
+    }
+
+    if(addressForm.classList.contains('active')) {
+        addressBtn.innerHTML = `Add address`
+        addressForm.classList.add('d-none')
+        addressForm.classList.remove('active');
+        addressBtn.innerHTML = `<i class="fas fa-plus"></i> Add Address`
+
+    } else {
+        addressBtn.innerHTML = `<i class="fas fa-times"></i> Cancel`
+        addressForm.classList.add('active')
+        addressForm.classList.remove('d-none');
+        addressForm.style.display = 'flex';
+
+    }
+}
+
 // AJAX
 
 const eventListener = () => {
@@ -108,25 +154,29 @@ const eventListener = () => {
     const profileSave = document.querySelector('.profile__save');
     const profileEdit = document.querySelector('.edit__btn');
 
+    const editBtn = document.querySelectorAll('.edit-address');
+
     form.addEventListener('submit', e => {
         e.preventDefault();
         profileUpload();
     });
 
     addressBtn.addEventListener('click', e => {
-        if(addressForm.classList.contains('active')) {
-            addressBtn.innerHTML = `Add address`
-            addressForm.classList.add('d-none')
-            addressForm.classList.remove('active');
-            addressBtn.innerHTML = `<i class="fas fa-plus"></i> Add Address`
 
-        } else {
-            addressBtn.innerHTML = `<i class="fas fa-times"></i> Cancel`
-            addressForm.classList.add('active')
-            addressForm.classList.remove('d-none');
-            addressForm.style.display = 'flex';
+        editAddress();
+        //if(addressForm.classList.contains('active')) {
+            //addressBtn.innerHTML = `Add address`
+            //addressForm.classList.add('d-none')
+            //addressForm.classList.remove('active');
+            //addressBtn.innerHTML = `<i class="fas fa-plus"></i> Add Address`
 
-        }
+        //} else {
+            //addressBtn.innerHTML = `<i class="fas fa-times"></i> Cancel`
+            //addressForm.classList.add('active')
+            //addressForm.classList.remove('d-none');
+            //addressForm.style.display = 'flex';
+
+        //}
     });
 
     profileEdit.addEventListener('click', () => {
@@ -153,6 +203,23 @@ const eventListener = () => {
         e.preventDefault();
 
         addAddress();
+    });
+
+    editBtn.forEach(btn => {
+        btn.addEventListener('click', async function() {
+
+            let dataId = this.getAttribute('data-id');
+            console.log(dataId);
+
+            let data =  await fetch(`/edit_address/${dataId}/`);
+
+            let response = await data.json();
+
+
+            editAddress(response);
+            //console.log(response);
+
+        })
     });
 
 }
