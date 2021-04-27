@@ -61,7 +61,8 @@ const profileUpload = () => {
     });
 }
 
-const addAddress = (addId=false) => {
+const addAddress = () => {
+    const addressSubmit = document.querySelector('.address__submit');
     const form = document.querySelector('.form__add');
     let formData= new FormData(form);
     let data = {};
@@ -74,7 +75,9 @@ const addAddress = (addId=false) => {
         data['note'] = null;
     }
 
-    if(!addId) {
+    if(addressSubmit.getAttribute('data-btn') === 'add') {
+
+
         fetch('/add_address/', {
             method: 'POST',
             headers: {
@@ -93,16 +96,19 @@ const addAddress = (addId=false) => {
             });
     } else {
 
+
+        let addId = addressSubmit.getAttribute('data-id');
+
         fetch(`/edit_address/${addId}/`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
                 'X-CSRFToken': csrftoken
             },
-            body: JSON.stringify(data);
+            body: JSON.stringify(data)
         })
             .then(response => {
-            return response.json()
+                return response.json()
             })
             .then(result => {
                 console.log(result)
@@ -119,7 +125,7 @@ const editAddress = (data=false) => {
     const addressSubmit = document.querySelector('.address__submit');
 
     if(data) {
-        
+
 
         let { fields } = JSON.parse(data);
 
@@ -187,7 +193,7 @@ const eventListener = () => {
     });
 
     addressBtn.addEventListener('click', e => {
-        
+
         const customerFullName = document.getElementById('id_full_name');
         const customerPhone = document.getElementById('id_phone');
         const customerNote = document.getElementById('id_note');
@@ -208,8 +214,12 @@ const eventListener = () => {
         customerBarangay.value = null
 
         addressSubmit.setAttribute('data-btn', 'add');
+
+        if(addressSubmit.getAttribute('data-id')) {
+            addressSubmit.removeAttribute('data-id');
+        }
         editAddress();
-        
+
 
     });
 
@@ -248,15 +258,14 @@ const eventListener = () => {
             let data =  await fetch(`/fetch_address/${dataId}/`);
 
             let response = await data.json();
-            
-            
+
+
             addressSubmit.setAttribute('data-btn', 'edit')
+            addressSubmit.setAttribute('data-id', dataId)
 
             editAddress(response);
-            
-            let id = editBtn.getAttribute('edit-address')
-            addAddress(id);
-            
+
+
             //console.log(response);
 
         })

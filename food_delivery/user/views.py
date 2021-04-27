@@ -101,11 +101,13 @@ def fetch_address(request, pk):
 def edit_address(request, pk):
     payload = json.loads(request.body.decode('utf-8'))
     address = CustomerShippingAddress.objects.get(pk=pk)
-    form = CustomerShippingAddressForm(instance=address)
+    form = CustomerShippingAddressForm(payload, instance=address)
+
+    form.data['customer'] = request.user
 
     if form.is_valid():
         form.save()
         return JsonResponse({'message': 'address updated'})
 
-    return JsonReponse({'message': 'error occured'})
+    return JsonResponse({'message': 'error occured'})
 # Ajax
