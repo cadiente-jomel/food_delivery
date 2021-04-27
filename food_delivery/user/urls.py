@@ -12,4 +12,5 @@ urlpatterns = [
     path('profile_upload/', views.profile_upload, name='profile-upload-page'),
     path('add_address/', views.add_address, name='add-address'),
     path('edit_address/<str:pk>/', views.edit_address, name='edit-address'),
+    path('fetch_address/<str:pk>/', views.fetch_address, name='fetch-address'),
 ]

@@ -88,13 +88,24 @@ def add_address(request):
         return JsonResponse({'message': 'Address Added', 'data': payload})
     return JsonResponse({'message': 'Error occured'})
 
-def edit_address(request, pk):
+def fetch_address(request, pk):
     address = CustomerShippingAddress.objects.get(pk=pk)
     serialize = serializers.serialize('json', [address, ], fields=('full_name', 'phone', 'house_no', 'zip_code', 'province', 'city_municipality', 'barangay', 'note'))
-    
+
     obj = json.loads(serialize)
 
     data = json.dumps(obj[0])
 
     return JsonResponse(data, safe=False)
+
+def edit_address(request, pk):
+    payload = json.loads(request.body.decode('utf-8'))
+    address = CustomerShippingAddress.objects.get(pk=pk)
+    form = CustomerShippingAddressForm(instance=address)
+
+    if form.is_valid():
+        form.save()
+        return JsonResponse({'message': 'address updated'})
+
+    return JsonReponse({'message': 'error occured'})
 # Ajax
