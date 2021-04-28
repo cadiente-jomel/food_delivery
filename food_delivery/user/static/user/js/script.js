@@ -1,6 +1,15 @@
 // ajax for upload
 'use-strict';
 
+const popupSave = (text) => {
+    const productSuccess = document.querySelector('.product__success');
+    productSuccess.innerHTML = text;
+    productSuccess.style.top = '0'; 
+    setTimeout(() => {
+        productSuccess.style.top = '-3.4rem';
+    }, 7000);
+}
+
 //CSRFToken
 const getCookie = (name) => {
     let cookieValue = null;
@@ -57,12 +66,13 @@ const profileUpload = () => {
     }).then(response => {
         return response.json();
     }).then(result => {
-        console.log(result);
+        popupSave(result.message);
     });
 }
 
 const addAddress = () => {
     const addressSubmit = document.querySelector('.address__submit');
+    const productSuccess = document.querySelector('.product__success');
     const form = document.querySelector('.form__add');
     let formData= new FormData(form);
     let data = {};
@@ -76,7 +86,7 @@ const addAddress = () => {
     }
 
     if(addressSubmit.getAttribute('data-btn') === 'add') {
-
+    
 
         fetch('/add_address/', {
             method: 'POST',
@@ -92,7 +102,7 @@ const addAddress = () => {
             .then(result => {
                 let addressData = JSON.parse(result.data);
                 newAddressRender(addressData);
-                console.log(result.message);
+                popupSave(result.message);
             });
     } else {
 
@@ -111,7 +121,8 @@ const addAddress = () => {
                 return response.json()
             })
             .then(result => {
-                console.log(result)
+                let text = `${result.message} <a href="/profile/" style="color: #fff;">Reload</a> to see changes.`
+                popupSave(text)
             })
     }
 
@@ -253,7 +264,6 @@ const eventListener = () => {
         btn.addEventListener('click', async function() {
 
             let dataId = this.getAttribute('data-id');
-            console.log(dataId);
 
             let data =  await fetch(`/fetch_address/${dataId}/`);
 
@@ -264,10 +274,6 @@ const eventListener = () => {
             addressSubmit.setAttribute('data-id', dataId)
 
             editAddress(response);
-
-
-            //console.log(response);
-
         })
     });
 

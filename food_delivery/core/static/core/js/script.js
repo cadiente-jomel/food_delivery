@@ -42,14 +42,12 @@ const addToCart = () => {
     }).then(res => {
         return res.json()
     }).then(result => {
-        console.log(result);
-
         if (!result['isLogged']) {
             window.location.href = '/login';
         }
         productSuccess.innerText = result['message'];
         productSuccess.style.top = '0';
-        
+
         setTimeout(() => {
             productSuccess.style.top = '-3.4rem';
         }, 2000);

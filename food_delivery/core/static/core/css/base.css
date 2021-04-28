@@ -73,3 +73,18 @@ body {
 /* -------------------
  * bootstrap overriden components
  * -------------------*/
+
+/* added to cart popup */
+.product__success {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: var(--padding-sm);
+  background: rgba(22, 211, 154, .8);
+  font-size: var(--font-size);
+  color: var(--neutral-color);
+  letter-spacing: var(--letter-spacing);
+  border-radius: 5px;
+  top: -3.4rem;
+  transition: .2s ease-in-out;
+}

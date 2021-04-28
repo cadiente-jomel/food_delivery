@@ -107,7 +107,7 @@ def edit_address(request, pk):
 
     if form.is_valid():
         form.save()
-        return JsonResponse({'message': 'address updated'})
+        return JsonResponse({'message': 'Changes has been made'})
 
-    return JsonResponse({'message': 'error occured'})
+    return JsonResponse({'message': 'something went wrong'})
 # Ajax
